@@ -1,0 +1,10 @@
+.header__container{
+    width: 1440px;
+    height: 80px;
+    /* background: pink; */
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+}
