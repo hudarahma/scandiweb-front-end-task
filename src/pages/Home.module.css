@@ -1,0 +1,16 @@
+.home__container {
+    /* padding: 0 105px 0 105px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.cards__wrapper {
+    /* display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));  */
+    /*   grid-template-columns: auto auto auto  */
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

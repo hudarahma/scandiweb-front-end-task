@@ -14,7 +14,7 @@
     font-size: 16px;
     line-height: 120%;
     text-transform: uppercase;
-    width: 320px;
+    width: 200px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -26,12 +26,11 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 
 .span {
-    margin-left: 20px;
     cursor: pointer;
     position: relative;
     /* background-color: pink; */
