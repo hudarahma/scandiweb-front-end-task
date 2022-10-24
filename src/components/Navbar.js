@@ -1,20 +1,21 @@
 import React from 'react'
 import styles from './Navbar.module.css';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <div className={styles.navbar__container}>
        
             <nav>
-                <a>
+                <Link to='/categories/women'>
                     <span className={styles.span}>Women</span>
-                </a>
-                <a>
+                </Link>
+                <Link to='/categories/Men'>
                     <span className={styles.span}>Men</span>
-                </a>
-                <a>
+                </Link>
+                <Link to='/categories/Kids'>
                     <span className={styles.span}>Kids</span>
-                </a>
+                </Link>
             </nav>     
     </div>
   )
