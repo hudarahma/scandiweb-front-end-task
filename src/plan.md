@@ -9,5 +9,6 @@
 9. create Pdp page --> product description page
 10. create product details component to grap all information in it
 11. import Header and ProductDetails component in the pdp page
-12. apply pages into APP
+12. apply pages into APP (use react-router)
 13. link all nav links and images to pages (use react-router)
+14. Implement Apollo Client --> https://www.apollographql.com/docs/react/get-started
