@@ -3,50 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
-
-client.query({
-  query: gql`
-  query GetData {
-    categories{
-      name
-      products{
-      id
-      name
-      brand
-      inStock
-      gallery
-      category
-      description
-      prices{
-          amount
-          currency{
-          symbol
-          label
-          }
-      }
-      attributes{
-          type
-          name
-          items{
-          value
-          displayValue
-          id
-          }
-      }
-      }
-  }
-  }
-  `,
-  })
-  .then(res => console.log(res))
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
