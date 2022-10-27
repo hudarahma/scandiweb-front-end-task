@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ShoppingBag.module.css';
-import { useCurrencies } from '../graghql/useCurrencies';
+import { useCurrencies } from '../hooks/useCurrencies';
 
 function ShoppingBag() {
   const { loading, error, data } = useCurrencies();

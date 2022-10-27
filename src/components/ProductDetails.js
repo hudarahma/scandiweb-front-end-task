@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ProductDetails.module.css';
-import { useProduct } from '../graghql/useProduct';
+import { useProduct } from '../hooks/useProduct';
 import { useParams } from 'react-router-dom';
 
 function ProductDetails() {

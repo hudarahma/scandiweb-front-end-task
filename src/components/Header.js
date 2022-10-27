@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css'
 import { Link } from 'react-router-dom';
-import { useProducts } from '../graghql/useProducts';
+import { useProducts } from '../hooks/useProducts';
 import ShoppingBag from './ShoppingBag';
 
 

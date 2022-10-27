@@ -2,8 +2,8 @@ import React from 'react';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
 import styles from './Home.module.css';
-import { useProducts } from '../graghql/useProducts'
 import { Link } from 'react-router-dom'
+import { useProducts } from '../hooks/useProducts';
 
 
 function Home() {
