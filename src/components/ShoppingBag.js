@@ -12,9 +12,11 @@ function ShoppingBag() {
       {/* option on hover need to be fixed or use material UI */}
           
           <select className={styles.currencies} >
-          {data.currencies.map((currency) =>(
-              <option className={styles.option} key={currency.id} value={currency.symbol}>{currency.symbol} {currency.label}</option>
-          ))}
+          {data.currencies.map((currency) =>{
+              return(
+                <option className={styles.option} key={currency.id} value={currency.symbol}>{currency.symbol} {currency.label}</option>
+              )
+          })}
           </select>
         <img className={styles.bag} src='/icons/Vector.svg' alt='bag-svg'/>
 

@@ -10,7 +10,7 @@ function Cards(props) {
     <div className={styles.cards__container} key={props.id}>
         
         <img className={styles.product__img} src={props.image} alt='product' />
-    
+        
       <button className={styles.add__to__basket__button}>
         <img className={styles.basket__img} src='/icons/Vector-white.svg' alt='' />
       </button>

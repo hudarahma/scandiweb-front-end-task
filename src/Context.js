@@ -1,5 +1,5 @@
 
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 
 export const MyContext = createContext();
@@ -8,12 +8,12 @@ export const MyContext = createContext();
 const ContextProvider = ({ children }) => {
 
     
-
+    const [ categoryName, setCategoryName] = useState();
 
     
     
 
-    const initialState = {  }
+    const initialState = { categoryName, setCategoryName }
 
 
 

@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
 
- 
+//  const { categoryName } = useContext(MyContext);
   return (
     
 
