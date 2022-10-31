@@ -1,3 +1,6 @@
+- clone the endpiont from 'https://github.com/scandiweb/junior-react-endpoint'
+- clone and npm install , npm start, runs in locolhost:4000
+
 1. create Header component inculding navbar, logo and shopping bag item
 2. create Home page
 3. create card component to show the products and import in home page
