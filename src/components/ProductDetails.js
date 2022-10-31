@@ -7,30 +7,24 @@ function ProductDetails() {
 
     const { id } = useParams();
     const { data, loading, error } = useProduct(id);
+    const defualtImageRef = useRef();
 
-  
+    const [ image, setImage ] = useState(defualtImageRef);
+    const [ attributeValue, setAttributeValue ] = useState();
+    // const [ attributePrice, setAttributesPrice ] = useState();
+    
+   
+    // save attributes on click .. bug is only saves one attribute, not multiple
     let attributesOption = [ ];
-    const [ image, setImage ] = useState();
-    const [ attributeValue, setAttributeValue ] = useState(attributesOption);
-    const [ attributePrice, setAttributesPrice ] = useState();
-    
-    const defualtImageRef = useRef()
-    
-    // attributesOption.push(attributeValue);
-    // attributesOption = [ ...attributesOption, {id: attributeValue}];
-    // console.log(attributesOption,'options') 
+    attributesOption.push(attributeValue);
+    attributesOption = [ ...attributesOption, {id: attributeValue}];
+    console.log(attributesOption,'options') 
 
-
-    
-    const getAttributes = (value) => {
-        setAttributeValue( value => [...value, attributesOption]);
-        console.log(attributeValue,'att')
-    }
     
     // console.log(data.product.gallery[0],'data--->')
-    useEffect(()=> {
-        defualtImageRef.current = image;
-    },[image]);
+    // useEffect(()=> {
+        
+    // },[]);
     
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -41,9 +35,8 @@ function ProductDetails() {
         prodcutBrand: data.product.brand,
         productName: data.product.name,
         // atributeName: data.product.attributes,
-        // selectedAttribut : attributesOption ,
+        selectedAttribut : attributesOption ,
         productImageList: data.product.gallery,
-        
         attributePrice: data.product.price,
         
     }];
@@ -71,7 +64,8 @@ function ProductDetails() {
                         <h1 className={styles.brand}  >{data.product.brand}</h1>
                         <h1 className={styles.name}>{data.product.name}</h1>
                     </div>
-                
+                {/* save the selected attributes into the array each time */}
+                {/* its good for only saving one attributes , not multiple */}
                     { data.product.attributes.map( attribute => (
                         
                     <div className={styles.product__size} key={attribute.id}>
@@ -80,27 +74,20 @@ function ProductDetails() {
                         <div className={styles.btn__size}>
                         {attribute.items.map(item => (
                             <button className={styles.btn} style={{backgroundColor:`${item.value}`}} key={item.id} 
-                              onClick={()=> getAttributes(item.id)}>
+                              onClick={()=> setAttributeValue(item.id)}>
                             {item.displayValue}</button>
                                 
                         ))}
                         </div>
                     </div>
                     ))}
-                    {/* <div className={styles.product__color}>
-                        <span>COLOR:</span>
-                        <div className={styles.btn__color}>
-                            <button className={styles.button}>color</button>
-                            <button className={styles.button}>color</button>
-                            <button className={styles.button}>color</button>
-                        </div>
-                    </div> */}
-            
+                            {/* price has to change from home component */}
                     <div className={styles.product__price}>
                         <span className={styles.price}>PRICE:</span>
                         <h3>$50.00</h3>
                     </div>
-        
+                    
+                    {/* fix the discription on the UI */}
                     <button className={styles.add__to__basket__btn}>ADD TO CART</button>
                     <span className={styles.product__discription}>{data.product.description}</span>
                 </div>
