@@ -15,7 +15,7 @@ function Cards(props) {
         <img className={styles.basket__img} src='/icons/Vector-white.svg' alt='' />
       </button>
       <h3 className={styles.product__name}>{props.name}</h3>
-      <h3 className={styles.product__price}>{props.symbol} {props.price}</h3>
+      <h3 className={styles.product__price} >{props.symbol} {props.price}</h3>
     </div>  
 
   )  

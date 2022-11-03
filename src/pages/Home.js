@@ -7,19 +7,23 @@ import { useProducts } from '../hooks/useProducts';
 import { MyContext } from '../Context';
 
 
+
 function Home() {
 
   const { loading, error, data } = useProducts();
-  const { categoryName } = useContext(MyContext);
+  const { categoryName, currency } = useContext(MyContext);
+ 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
+ 
 
   console.log({
     loading,
     error,
     data
   })
+
+ 
 
   return (
     <div className={styles.home__container}>
@@ -29,9 +33,18 @@ function Home() {
         </div>
 
       {data.categories[0].products.map( product => (
-        <Link to={`/product/${product.id}`}>
-            <div className={styles.cards__wrapper} key={product.id}>
-              <Cards id={product.id} image={product.gallery[0]} name={product.name} price={product.prices[0].amount} symbol={product.prices[0].currency.symbol} />
+        <Link to={`/product/${product.id}`} >
+            <div className={styles.cards__wrapper} key={product.id} >
+              { product.prices.filter(price =>  price.currency.symbol === currency).map(filterPrice => (
+                <Cards 
+                  id={product.id} 
+                  image={product.gallery[0]} 
+                  name={product.name} 
+                  price={filterPrice.amount} 
+                  symbol={currency} 
+                                    
+                  />
+              ))}
             </div>
           </Link>
 

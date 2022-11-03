@@ -12,7 +12,8 @@
 9. Implement Apollo Client --> https://www.apollographql.com/docs/react/get-started
 10. Use Apollo/client hooks for state management (useQuery to read the schema)
 11. map through the hooks and show up in front end
-12. make the cards clickble
+12. make the cards clickble, using react routers (Link)
 13. useParams for using each product id
 14. react hooks useState() for making product image list clickble
+15. Apply currencies for products 
   

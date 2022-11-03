@@ -1,17 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {  useContext, useRef, useState, useEffect } from 'react'
 import styles from './ProductDetails.module.css';
 import { useProduct } from '../hooks/useProduct';
 import { useParams } from 'react-router-dom';
+import { MyContext } from '../Context';
+
 
 function ProductDetails() {
 
     const { id } = useParams();
     const { data, loading, error } = useProduct(id);
+    const { currency, setProductPrice, productPrice } = useContext(MyContext);
+
     const defualtImageRef = useRef();
+  
 
     const [ image, setImage ] = useState(defualtImageRef);
-    const [ attributeValue, setAttributeValue ] = useState();
-    // const [ attributePrice, setAttributesPrice ] = useState();
+    const [ attributeValue, setAttributeValue ] = useState('');
+    
     
    
     // save attributes on click .. bug is only saves one attribute, not multiple
@@ -19,30 +24,36 @@ function ProductDetails() {
     attributesOption.push(attributeValue);
     attributesOption = [ ...attributesOption, {id: attributeValue}];
     console.log(attributesOption,'options') 
-
     
     // console.log(data.product.gallery[0],'data--->')
-    // useEffect(()=> {
-        
-    // },[]);
     
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     console.log({data, loading, error})
-   
-    
+
     let addToCardProduct = [{
         prodcutBrand: data.product.brand,
         productName: data.product.name,
-        // atributeName: data.product.attributes,
+        atributesName: data.product.attributes,
         selectedAttribut : attributesOption ,
         productImageList: data.product.gallery,
-        attributePrice: data.product.price,
+        attributePrice: productPrice,
         
     }];
+   
+   
     
-    console.log(addToCardProduct,'selectedProduct')
+   
 
+    
+    const addToCart = () => {
+
+    }
+    
+    
+
+    
+    
 
 
     
@@ -81,14 +92,26 @@ function ProductDetails() {
                         </div>
                     </div>
                     ))}
-                            {/* price has to change from home component */}
-                    <div className={styles.product__price}>
+                            {/* price changes  */}
+                    <div className={styles.product__price} >
                         <span className={styles.price}>PRICE:</span>
-                        <h3>$50.00</h3>
+                        { data.product.prices.filter(price =>  price.currency.symbol === currency).map(filterPrice => (
+                            <h3>
+                                <input
+                                className={styles.price__input}  
+                                type="text"
+                                value={currency + filterPrice.amount}
+                                onChange={(e) => setProductPrice(e.target.value) }/>
+                            </h3>
+                        ))
+                        }
+                    
                     </div>
+
                     
                     {/* fix the discription on the UI */}
                     <button className={styles.add__to__basket__btn}>ADD TO CART</button>
+
                     <span className={styles.product__discription}>{data.product.description}</span>
                 </div>
       </div>

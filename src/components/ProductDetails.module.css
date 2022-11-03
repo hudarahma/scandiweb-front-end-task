@@ -103,7 +103,13 @@
     color: var(--white);
     outline: none;
 }
+.price__input {
+    border: none;
+}
 
+.price__input:focus {
+    outline: none;
+}
 
 /* .btn__color {
     width: 117px;
