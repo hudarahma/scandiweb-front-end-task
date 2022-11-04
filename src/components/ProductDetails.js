@@ -4,13 +4,13 @@ import { useProduct } from '../hooks/useProduct';
 import { useParams } from 'react-router-dom';
 import { MyContext } from '../Context';
 
-
 function ProductDetails() {
-
+    
     const { id } = useParams();
     const { data, loading, error } = useProduct(id);
-    const { currency, setProductPrice, productPrice } = useContext(MyContext);
-
+    const { currency, setProductPrice, setProductBrand, setProductName } = useContext(MyContext);
+    
+    let attributeOption = [ ];
     const defualtImageRef = useRef();
   
 
@@ -18,28 +18,23 @@ function ProductDetails() {
     const [ attributeValue, setAttributeValue ] = useState('');
     
     
+    
    
     // save attributes on click .. bug is only saves one attribute, not multiple
-    let attributesOption = [ ];
-    attributesOption.push(attributeValue);
-    attributesOption = [ ...attributesOption, {id: attributeValue}];
-    console.log(attributesOption,'options') 
     
-    // console.log(data.product.gallery[0],'data--->')
+    const allAtts = (name) => {
+        
+        attributeOption.push(name);
+        attributeOption = [ ...attributeOption, attributeValue ]
+        console.log(attributeOption,'option')
+       
+    }
     
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     console.log({data, loading, error})
 
-    let addToCardProduct = [{
-        prodcutBrand: data.product.brand,
-        productName: data.product.name,
-        atributesName: data.product.attributes,
-        selectedAttribut : attributesOption ,
-        productImageList: data.product.gallery,
-        attributePrice: productPrice,
-        
-    }];
+  
    
    
     
@@ -72,32 +67,55 @@ function ProductDetails() {
                 <div className={styles.product__details}>
         
                     <div className={styles.product__brand__name}>
-                        <h1 className={styles.brand}  >{data.product.brand}</h1>
-                        <h1 className={styles.name}>{data.product.name}</h1>
+                        
+                        <input 
+                            type='text'
+                            disabled 
+                            className={styles.brand}
+                            value={data.product.brand}
+                            onChange={(e) => setProductBrand(e.target.value) }
+                        />
+                        
+                        <input 
+                            type='text'
+                            disabled 
+                            className={styles.name}
+                            value={data.product.name}
+                            onChange={(e) => setProductName(e.target.value)}
+                        />
                     </div>
                 {/* save the selected attributes into the array each time */}
                 {/* its good for only saving one attributes , not multiple */}
-                    { data.product.attributes.map( attribute => (
+                    { data.product.attributes.map( (attribute, index) => (
                         
-                    <div className={styles.product__size} key={attribute.id}>
-                        <span >{attribute.name}</span>
+                        <div className={styles.product__size} key={attribute.id}>
+                            <span >{attribute.name}</span>
 
-                        <div className={styles.btn__size}>
-                        {attribute.items.map(item => (
-                            <button className={styles.btn} style={{backgroundColor:`${item.value}`}} key={item.id} 
-                              onClick={()=> setAttributeValue(item.id)}>
-                            {item.displayValue}</button>
-                                
-                        ))}
+                            <div className={styles.btn__size} key={index}>
+                            {attribute.items.map((item) => (
+                                <button 
+                                    className={styles.btn}
+                                    style={{backgroundColor:`${item.value}`}} 
+                                    key={item.id} 
+                                    onClick={()=> { 
+                                        setAttributeValue(item.id); 
+                                        allAtts(item.id); 
+                                    }}
+                                >
+                                {item.displayValue}
+                                </button>
+                                    
+                            ))}
+                            </div>
                         </div>
-                    </div>
                     ))}
                             {/* price changes  */}
                     <div className={styles.product__price} >
                         <span className={styles.price}>PRICE:</span>
-                        { data.product.prices.filter(price =>  price.currency.symbol === currency).map(filterPrice => (
-                            <h3>
+                        { data.product.prices.filter(price =>  price.currency.symbol === currency).map((filterPrice, index) => (
+                            <h3 key={index}>
                                 <input
+                                disabled
                                 className={styles.price__input}  
                                 type="text"
                                 value={currency + filterPrice.amount}
@@ -112,7 +130,7 @@ function ProductDetails() {
                     {/* fix the discription on the UI */}
                     <button className={styles.add__to__basket__btn}>ADD TO CART</button>
 
-                    <span className={styles.product__discription}>{data.product.description}</span>
+                    <span className={styles.product__discription}> {data.product.description}</span>
                 </div>
       </div>
   

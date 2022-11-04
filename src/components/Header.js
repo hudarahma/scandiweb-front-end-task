@@ -20,11 +20,11 @@ function Header() {
       <div className={styles.navbar__container} >
           <nav>
             
-          {data.categories.map(category => (
-            <Link to='/'>
-              <span className={styles.span} key={category.id}  onClick={()=> setCategoryName(category.name)}>{category.name}</span>
-            </Link>
-          ))}
+            {data.categories.map((category, index) => (
+            <Link to='/'   key={index} >
+              <span className={styles.span} key={index}  onClick={()=> setCategoryName(category.name)}>{category.name}</span>
+             </Link>
+            ))}
              
           </nav>     
      </div>

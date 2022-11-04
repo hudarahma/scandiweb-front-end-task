@@ -32,21 +32,21 @@ function Home() {
         <h1>{categoryName}</h1>
         </div>
 
-      {data.categories[0].products.map( product => (
-        <Link to={`/product/${product.id}`} >
-            <div className={styles.cards__wrapper} key={product.id} >
-              { product.prices.filter(price =>  price.currency.symbol === currency).map(filterPrice => (
-                <Cards 
-                  id={product.id} 
-                  image={product.gallery[0]} 
-                  name={product.name} 
-                  price={filterPrice.amount} 
-                  symbol={currency} 
-                                    
-                  />
-              ))}
-            </div>
-          </Link>
+      {data.categories[0].products.map( (product, index) => (
+        <Link to={`/product/${product.id}`} key={index}>
+          <div className={styles.cards__wrapper} key={index} >
+            { product.prices.filter(price =>  price.currency.symbol === currency).map(filterPrice => (
+              <Cards 
+                key={product.id} 
+                image={product.gallery[0]} 
+                name={product.name} 
+                price={filterPrice.amount} 
+                symbol={currency} 
+                                  
+                />
+            ))}
+          </div>
+        </Link>
 
       ))}
     </div>

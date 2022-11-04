@@ -63,10 +63,24 @@
 
 .name {
     font-weight: 400;
+    font-size: 30px;
+    line-height: 27px;
+    border: none;
+    background: var(--white);
+    color: var(--black);
 }
+
 .brand {
     font-weight: 600;
     margin-bottom: 5px;
+    font-size: 30px;
+    line-height: 27px;
+    border: none;
+    background: var(--white);
+    color: var(--black);
+}
+.brand .name:focus{
+    outline: none;
 }
 
 .product__size {
@@ -105,6 +119,11 @@
 }
 .price__input {
     border: none;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 18px;
+    color: var(--black);
+    background: var(--white);
 }
 
 .price__input:focus {

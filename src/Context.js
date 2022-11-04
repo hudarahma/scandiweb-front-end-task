@@ -11,8 +11,8 @@ const ContextProvider = ({ children }) => {
     const [ categoryName, setCategoryName] = useState();
     const [ productPrice, setProductPrice ] = useState('');
     const [ currency, setCurrency ] = useState('$');
-    // const [ prodcutBrand, setProductBrand ] = useState('');
-    // const [ productName , setProductName ] = useState('');
+    const [ prodcutBrand, setProductBrand ] = useState('');
+    const [ productName , setProductName ] = useState('');
     // const [ atributesName, setAtributesName ] = useState('');
     // const [ selectedAttribut, setSelectedAttributes ] = useState('');
 
@@ -24,6 +24,7 @@ const ContextProvider = ({ children }) => {
 
 
     // }];
+   
 
     const handleChange = (e) => { 
         setCurrency(e.target.value);
@@ -38,7 +39,12 @@ const ContextProvider = ({ children }) => {
         setCurrency, 
         handleChange ,
         productPrice,
-        setProductPrice,
+        setProductPrice, 
+        prodcutBrand,
+        setProductBrand,
+        productName , 
+        setProductName,
+        
        
     }
 
