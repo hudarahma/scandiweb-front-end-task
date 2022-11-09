@@ -1,91 +1,78 @@
-import React, {  useContext, useRef, useState, useEffect } from 'react'
+import React, {  useContext, useState } from 'react'
 import styles from './ProductDetails.module.css';
 import { useProduct } from '../hooks/useProduct';
 import { useParams } from 'react-router-dom';
 import { MyContext } from '../Context';
+import { useNavigate } from 'react-router-dom';
+
 
 function ProductDetails() {
     
     const { id } = useParams();
     const { data, loading, error } = useProduct(id);
-    const { currency, setProductPrice, setProductBrand, setProductName } = useContext(MyContext);
-    
-    let attributeOption = [ ];
-    const defualtImageRef = useRef();
-  
-
-    const [ image, setImage ] = useState(defualtImageRef);
+    const { currency, productPriceRef, setSelectedAttributes, selectedAttributs , setProducts } = useContext(MyContext);
+    const [ image, setImage ] = useState('');
     const [ attributeValue, setAttributeValue ] = useState('');
-    
-    
-    
+    let attributeOption = [ ];
+    let options = [];
+    let navigate = useNavigate();
    
-    // save attributes on click .. bug is only saves one attribute, not multiple
     
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :</p>;
+    console.log({data, loading, error})
+    
+
+    // save attributes function on click 
     const allAtts = (name) => {
-        
+       
         attributeOption.push(name);
         attributeOption = [ ...attributeOption, attributeValue ]
         console.log(attributeOption,'option')
+        setSelectedAttributes(attributeOption)
        
     }
-    
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    console.log({data, loading, error})
-
-  
-   
-   
-    
-   
-
-    
-    const addToCart = () => {
-
+    // ADD the attributes into the global state in context api and go to the next page
+    const addToCart = (event) => {
+        event.preventDefault();
+        options = [...options, {
+            price: productPriceRef.current.value,
+            brand: data.product.brand,
+            name: data.product.name,
+            attribute: selectedAttributs,
+            image: data.product.gallery[0],
+            gallery: data.product.gallery
+        
+        }];
+        
+        setProducts(options);
+        console.log(options)
+        navigate('/order');
     }
     
-    
-
-    
-    
 
 
-    
     return (
     
         <div className={styles.product__details__container} key={data.product.id}>
 
                 <div className={styles.product__list__images}>
                 {data.product.gallery.map(img => (
-                    <img src={img} alt='product' key={img.id} onClick={()=> setImage(img)} ref={defualtImageRef}/>
+                    <img src={img} alt='product' key={img.id} onClick={()=> setImage(img)} />
                 ))}
                 </div>
                 <div className={styles.product__image}>
-                    <img src={image} alt={`${data.product.gallery[0]}`}  />
+                    <img src={image} alt='click on the list'  />
                 </div>
                 <div className={styles.product__details}>
         
                     <div className={styles.product__brand__name}>
                         
-                        <input 
-                            type='text'
-                            disabled 
-                            className={styles.brand}
-                            value={data.product.brand}
-                            onChange={(e) => setProductBrand(e.target.value) }
-                        />
-                        
-                        <input 
-                            type='text'
-                            disabled 
-                            className={styles.name}
-                            value={data.product.name}
-                            onChange={(e) => setProductName(e.target.value)}
-                        />
+                        <input className={styles.brand} type='text' value={data.product.brand}  />
+                        <input type='text' className={styles.name} value={data.product.name}  />
+
                     </div>
-                {/* save the selected attributes into the array each time */}
-                {/* its good for only saving one attributes , not multiple */}
+                {/* save the selected attributes into the array each time by the allAtts() and setAttributeValue() */}
                     { data.product.attributes.map( (attribute, index) => (
                         
                         <div className={styles.product__size} key={attribute.id}>
@@ -115,20 +102,21 @@ function ProductDetails() {
                         { data.product.prices.filter(price =>  price.currency.symbol === currency).map((filterPrice, index) => (
                             <h3 key={index}>
                                 <input
-                                disabled
                                 className={styles.price__input}  
                                 type="text"
                                 value={currency + filterPrice.amount}
-                                onChange={(e) => setProductPrice(e.target.value) }/>
+                                ref={productPriceRef}       
+                                />
                             </h3>
                         ))
-                        }
-                    
+                        }     
                     </div>
-
-                    
                     {/* fix the discription on the UI */}
-                    <button className={styles.add__to__basket__btn}>ADD TO CART</button>
+                    <button 
+                        className={styles.add__to__basket__btn}
+                        onClick={addToCart}
+                    >ADD TO CART
+                    </button>
 
                     <span className={styles.product__discription}> {data.product.description}</span>
                 </div>

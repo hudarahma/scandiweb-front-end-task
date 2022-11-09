@@ -1,5 +1,5 @@
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useRef, useState } from 'react';
 
 
 export const MyContext = createContext();
@@ -11,26 +11,35 @@ const ContextProvider = ({ children }) => {
     const [ categoryName, setCategoryName] = useState();
     const [ productPrice, setProductPrice ] = useState('');
     const [ currency, setCurrency ] = useState('$');
-    const [ prodcutBrand, setProductBrand ] = useState('');
-    const [ productName , setProductName ] = useState('');
-    // const [ atributesName, setAtributesName ] = useState('');
-    // const [ selectedAttribut, setSelectedAttributes ] = useState('');
+    const [ counter , setCounter ] = useState(1);
+    const [ price, setPrice ] = useState('');
+    // const [ productName , setProductName ] = useState('');
+    const [ selectedAttributs, setSelectedAttributes ] = useState('');
+    const [ products , setProducts ] = useState([]);
+    let productPriceRef = useRef('');
+    const defualtImageRef = useRef();
 
-    // let addToCardProduct = [{
-    //     prodcutBrand,
-    //     productName,
-    //     atributesName,
-    //     selectedAttribut,
-
-
-    // }];
-   
 
     const handleChange = (e) => { 
         setCurrency(e.target.value);
         console.log(e.target.value);
     }
+
+    const handlePrice = (e) => { 
+        setPrice(e.target.value);
+        console.log(e.target.value);
+    }
     
+    // counter increment
+    const increment = () => {
+        setCounter(counter + 1)
+    }
+
+    // counter decrement
+    const decrement = () => {
+        setCounter(counter - 1)
+    }
+   
 
     const initialState = { 
         categoryName,
@@ -38,14 +47,19 @@ const ContextProvider = ({ children }) => {
         currency, 
         setCurrency, 
         handleChange ,
+        handlePrice,
         productPrice,
         setProductPrice, 
-        prodcutBrand,
-        setProductBrand,
-        productName , 
-        setProductName,
-        
-       
+        selectedAttributs,
+        setSelectedAttributes,
+        productPriceRef,
+        defualtImageRef,
+        products , 
+        setProducts ,
+        counter,
+        setCounter,
+        increment,
+        decrement,
     }
 
 

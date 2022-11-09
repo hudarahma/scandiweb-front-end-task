@@ -21,28 +21,45 @@
     background: #EEEEEE;
     border: none;
 }
-/* .currencies.decorated .option:active {
-    background: #EEEEEE;
-    border: none;
-} */
 
-/* .option:active { 
-    background-color: #EEEEEE;
+.counter {
+    position: relative;
+    left: -12px;
+    top: -10px;
+    background: black;
+    border-radius: 50%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+  
+    justify-content: center;
 
-}
-
-.option:hover {
-    background-color: #EEEEEE;
 }
 .option:focus {
     background-color: #EEEEEE;
     border: none;
     outline: none;
-} */
+} 
 
 
 .bag {
     width: 20px;
     height: 13.01px;
     cursor: pointer;
+}
+
+.expand__box {
+    background-color: white;
+    width: 325px;
+    height: 677px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    top: 47px;
+    right: 10px;
+    padding: 32px 16px;
+    gap: 32px;
+    flex-direction: column;
 }

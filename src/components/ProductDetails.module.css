@@ -130,32 +130,6 @@
     outline: none;
 }
 
-/* .btn__color {
-    width: 117px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.button {
-    width: 32px;
-    height: 32px;
-    background: #0F6450;
-    cursor: pointer;
-    border: none;
-}
-.button:focus {
-    outline: none;
-} */
-
-/* .product__color {
-    width: 292px;
-    height: 72px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 18px;
-} */
 
 .product__price {
     width: 292px;

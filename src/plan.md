@@ -15,5 +15,9 @@
 12. make the cards clickble, using react routers (Link)
 13. useParams for using each product id
 14. react hooks useState() for making product image list clickble
-15. Apply currencies for products 
+15. Apply currencies for products with using filter method
+16. use Apollo hooks for ProductDetails component ( showing each product details)
+17. Creating Cart.js for showing cart page 
+18. Creating CartProduct for choosen product and import in the cart.js page
+19. Apply functions in context api 
   
